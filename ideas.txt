@@ -1,0 +1,2 @@
+Do teams with higher mean score have a better win-loss record? 
+Do teams with lower opposing team score have a better win-loss record?
