@@ -21,7 +21,7 @@ st.text('Season Record Against Other Teams When At Home')
 
 opponent = st.selectbox('Select an opposing team', teams_list)
 
-scores = team_df['date', 'visitor_team_name', 'home_team_score', 'visitor_team_score']
+scores = team_df[['date', 'visitor_team_name', 'home_team_score', 'visitor_team_score']]
 scores.columns('Date', 'Opponent', 'Home Score', 'Visitor Score')
 st.dataframe(scores)
 
