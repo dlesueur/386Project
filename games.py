@@ -13,7 +13,7 @@ teams_list = teams['full_name']
 team = st.selectbox('Select a team', teams_list)
 
 team_df = df[df['home_team_name'] == team]
-fig = px.histogram(team_df, x='home_team_score', nbins=20, title='Score Distribution When Playing At Home', color_discrete_map= 'Red')
+fig = px.histogram(team_df, x='home_team_score', nbins=20, title='Score Distribution When Playing At Home')
 fig.update_xaxes('Score')
 fig.update_yaxes('Frequency')
 st.plotly_chart(fig)
