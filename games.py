@@ -19,8 +19,8 @@ st.plotly_chart(fig)
 
 
 st.text('Season Record Against Other Teams')
-
-this_team = st.selectbox('Select a team', teams_list)
+this_teams_list = teams['full_name']
+this_team = st.selectbox('Select a team', this_teams_list)
 this_team_df = team_df[team_df['visitor_team_name'] == this_team]
 scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
 st.dataframe(scores)
