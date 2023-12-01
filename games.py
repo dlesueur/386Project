@@ -8,7 +8,7 @@ st.title('2022-23 NBA Season')
 st.text('Distribution Of Points When At Home')
 teams = pd.read_csv('teams')
 teams_list = teams['full_name']
-team = st.selectbox('Select a team', teams_list)
+team = st.selectbox('Select a team', teams_list, key = "selectbox1")
 
 df = pd.read_csv('games.csv')
 team_df = df[df['home_team_name'] == team]
@@ -20,7 +20,7 @@ st.plotly_chart(fig)
 
 st.text('Season Record Against Other Teams')
 this_teams_list = teams['full_name']
-this_team = st.selectbox('Select a team', this_teams_list)
+this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
 this_team_df = team_df[team_df['visitor_team_name'] == this_team]
 scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
 st.dataframe(scores)
