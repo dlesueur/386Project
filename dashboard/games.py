@@ -6,11 +6,11 @@ import plotly.express as px
 st.title('2022-23 NBA Season')
 
 st.text('Distribution Of Points When At Home')
-teams = pd.read_csv('teams')
+teams = pd.read_csv('datasets/team.csv')
 teams_list = teams['full_name']
 team = st.selectbox('Select a team', teams_list, key = "selectbox1")
 
-df = pd.read_csv('games.csv')
+df = pd.read_csv('datasets/games.csv')
 team_df = df[df['home_team_name'] == team]
 fig = px.histogram(team_df, x='home_team_score', nbins=20)
 fig.update_xaxes(title_text = 'Score')
