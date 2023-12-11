@@ -7,7 +7,7 @@ import matplotlib as plt
 st.title('2022-23 NBA Season')
 
 st.text('Distribution Of Points When At Home')
-teams = pd.read_csv('datasets/team.csv')
+teams = pd.read_csv('datasets/teams.csv')
 teams_list = teams['full_name']
 team = st.selectbox('Select a team', teams_list, key = "selectbox1")
 
