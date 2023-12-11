@@ -5,3 +5,10 @@ I considered doing many topics for my project. The top three that I was the most
 
 When I talked to TAs, my classmates, and others the general consensus was that any of the projects would be interesting. I decided to do the NBA one because it was the quickest data for me to access with an API. After talking to my group, I decided to expand my research to also compare in-season and post-season performances for each team and see what variables affect those outcomes. 
 
+## Data Collection Blog Post Feedback
+Initial commit SHA number:
+
+## EDA Blog Post Feedback
+Initial commit SHA number:
+
+## Streamlit Application Feedback
