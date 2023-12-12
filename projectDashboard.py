@@ -16,7 +16,7 @@ st.text('Distribution Of Points When At Home vs. Opponent')
 df = pd.read_csv('datasets/games.csv')
 colors = pd.read_csv('datasets/teamColors.csv')
 teamColor1 = colors.loc[colors['full_name'] == team, 'colorHex'].values[0]
-teamColor2 = colors.loc[colors['full_name'] == team, 'colorHex2'].values[0]
+teamColor2 = colors.loc[colors['full_name'] == team, 'ColorHex2'].values[0]
 team_df = df[df['home_team_name'] == team]
 # fig = px.histogram(team_df, x='home_team_score', nbins=15, color_discrete_sequence=[teamColor])
 # fig.update_xaxes(title_text = 'Score')
