@@ -24,8 +24,11 @@ fig.update_yaxes(title_text = 'Frequency')
 fig2 = px.histogram(team_df, x='visitor_team_score', nbins=15, color_discrete_sequence=[teamColor2])
 fig2.update_xaxes(title_text = 'Opponent Score')
 fig2.update_yaxes(title_text = 'Frequency')
-st.plotly_chart(fig, theme = None)
-st.plotly_chart(fig2, theme=None)
+
+st.title('Team Scores Histograms')
+
+st.plotly_chart(fig, theme = None, use_container_width=True)
+st.plotly_chart(fig2, theme=None ,use_container_width=True)
 
 # fig, ax = plt.subplots()
 # ax.hist(team_df['home_team_score'], bins=20, alpha=0.5, label="Home Team", color=teamColor1)  # Use your teamColor1
