@@ -23,14 +23,15 @@ team_df = df[df['home_team_name'] == team]
 # fig.update_yaxes(title_text = 'Frequency')
 # st.plotly_chart(fig, theme = None)
 
-plt.hist(team_df['home_team_score'], bins=20, alpha=0.5, label="Home Team", color='blue')  # Use your teamColor1
+fig, ax = plt.subplots()
+ax.hist(team_df['home_team_score'], bins=20, alpha=0.5, label="Home Team", color=teamColor1)  # Use your teamColor1
+ax.hist(team_df['visitor_team_score'], bins=20, alpha=0.5, label="Visitor Team", color=teamColor2)  # Use your teamColor2
+ax.legend()
+ax.set_xlabel('Points')
+ax.set_ylabel('Frequency')
 
-plt.hist(team_df['visitor_team_score'], bins=20, alpha=0.5, label="Visitor Team", color='red')  # Use your teamColor2
-plt.legend()
-plt.xlabel('Points')
-plt.ylabel('Frequency')
-
-st.pyplot(plt)
+# Show the plot using Streamlit
+st.pyplot(fig)
 
 
 st.text('Season Record Against Other Teams')
