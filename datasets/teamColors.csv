@@ -1,31 +1,31 @@
-,full_name,abbreviation,colorHex
-0,Atlanta Hawks,ATL,#C8102E
-1,Boston Celtics,BOS,#007A33
-2,Brooklyn Nets,BKN,#000000
-3,Charlotte Hornets,CHA,#1D1160
-4,Chicago Bulls,CHI,#CE1141
-5,Cleveland Cavaliers,CLE,#860038
-6,Dallas Mavericks,DAL,#00538C
-7,Denver Nuggets,DEN,#0E2240
-8,Detroit Pistons,DET,#C8102E
-9,Golden State Warriors,GSW,#1D428A
-10,Houston Rockets,HOU,#CE1141
-11,Indiana Pacers,IND,#002D62
-12,LA Clippers,LAC,#C8102E
-13,Los Angeles Lakers,LAL,#552583
-14,Memphis Grizzlies,MEM,#5D76A9
-15,Miami Heat,MIA,#98002E
-16,Milwaukee Bucks,MIL,#00471B
-17,Minnesota Timberwolves,MIN,#0C2340
-18,New Orleans Pelicans,NOP,#0C2340
-19,New York Knicks,NYK,#006BB6
-20,Oklahoma City Thunder,OKC,#007AC1
-21,Orlando Magic,ORL,#0077C0
-22,Philadelphia 76ers,PHI,#006BB6
-23,Phoenix Suns,PHX,#1D1160
-24,Portland Trail Blazers,POR,#E03A3E
-25,Sacramento Kings,SAC,#5A2D81
-26,San Antonio Spurs,SAS,#C4CED4
-27,Toronto Raptors,TOR,#CE1141
-28,Utah Jazz,UTA,#002B5C
-29,Washington Wizards,WAS,#002B5C
+,full_name,abbreviation,colorHex,ColorHex2
+0,Atlanta Hawks,ATL,#C8102E,#FDB927
+1,Boston Celtics,BOS,#007A33,#BA9653
+2,Brooklyn Nets,BKN,#000000,#FFFFFF
+3,Charlotte Hornets,CHA,#1D1160,#00788C
+4,Chicago Bulls,CHI,#CE1141,#000000
+5,Cleveland Cavaliers,CLE,#860038,#041E42
+6,Dallas Mavericks,DAL,#00538C,#002B5E
+7,Denver Nuggets,DEN,#0E2240,#FEC524
+8,Detroit Pistons,DET,#C8102E,#1D42BA
+9,Golden State Warriors,GSW,#1D428A,#FFC72C
+10,Houston Rockets,HOU,#CE1141,#000000
+11,Indiana Pacers,IND,#002D62,#FDBB30
+12,LA Clippers,LAC,#C8102E,#1D428A
+13,Los Angeles Lakers,LAL,#552583,#FDB927
+14,Memphis Grizzlies,MEM,#5D76A9,#12173F
+15,Miami Heat,MIA,#98002E,#F9A01B
+16,Milwaukee Bucks,MIL,#00471B,#EEE1C6
+17,Minnesota Timberwolves,MIN,#0C2340,#236192
+18,New Orleans Pelicans,NOP,#0C2340,#C8102E
+19,New York Knicks,NYK,#006BB6,#F58426
+20,Oklahoma City Thunder,OKC,#007AC1,#EF3B24
+21,Orlando Magic,ORL,#0077C0,#C4CED4
+22,Philadelphia 76ers,PHI,#006BB6,#ED174C
+23,Phoenix Suns,PHX,#1D1160,#E56020
+24,Portland Trail Blazers,POR,#E03A3E,#000000
+25,Sacramento Kings,SAC,#5A2D81,#63727A
+26,San Antonio Spurs,SAS,#C4CED4,#000000
+27,Toronto Raptors,TOR,#CE1141,#000000
+28,Utah Jazz,UTA,#002B5C,#00471B
+29,Washington Wizards,WAS,#002B5C,#E31837
