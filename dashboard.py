@@ -16,7 +16,7 @@ df = pd.read_csv('datasets/games.csv')
 colors = pd.read_csv('datasets/teamColors.csv')
 teamColor = colors.loc[colors['full_name'] == team, 'colorHex'].values[0]
 team_df = df[df['home_team_name'] == team]
-fig = px.histogram(team_df, x='home_team_score', nbins=10, color_discrete_sequence=[teamColor])
+fig = px.histogram(team_df, x='home_team_score', nbins=15, color_discrete_sequence=[teamColor])
 fig.update_xaxes(title_text = 'Score')
 fig.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig, theme = None)
