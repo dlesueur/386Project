@@ -23,29 +23,23 @@ team_scores = []
 team_scores.extend(home_scores)
 team_scores.extend(visitor_scores)
 team_scores_df = pd.DataFrame(team_scores, columns=['Scores'])
-
-
-# team_df = games[games['home_team_name'] == team]
 fig = px.histogram(team_scores_df, x='Scores', nbins=15, color_discrete_sequence=[teamColor1])
 fig.update_xaxes(title_text = 'Score')
 fig.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig, theme = None, use_container_width=True)
 
+# st.text('Season Record Against Other Teams')
+# this_teams_list = teams['full_name']
+# this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
+# this_team_df = team_df[team_df['visitor_team_name'] == this_team]
+# scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
+# st.dataframe(scores)
 
-# fig, ax = plt.subplots()
-# ax.hist(team_df['home_team_score'], bins=20, alpha=0.5, label="Home Team", color=teamColor1)  # Use your teamColor1
-# ax.hist(team_df['visitor_team_score'], bins=20, alpha=0.5, label="Visitor Team", color=teamColor2)  # Use your teamColor2
-# ax.legend()
-# ax.set_xlabel('Points')
-# ax.set_ylabel('Frequency')
-
-# # Show the plot using Streamlit
-# st.pyplot(fig)
-
-
-st.text('Season Record Against Other Teams')
-this_teams_list = teams['full_name']
-this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
-this_team_df = team_df[team_df['visitor_team_name'] == this_team]
-scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
-st.dataframe(scores)
+players = pd.read_csv('datasets/playersCurrent.csv')
+playersWithHeight = players[players['height'] != 0]
+team_id = teams.loc[teams['full_name'] == team, 'id'].values[0]
+teamsPlayers = playersWithHeight[playersWithHeight['team_id'] == team_id]
+fig2 = px.histogram(teamsPlayers, x='height', nbins = 15, color_discrete_sequence=[teamColor2])
+fig2.update_xaxes(title_text = 'Height')
+fig2.udpate_yaxes(title_text = 'Frequency')
+st.plotly_chart(fig2, theme = None)
