@@ -41,5 +41,5 @@ team_id = teams.loc[teams['full_name'] == team, 'id'].values[0]
 teamsPlayers = playersWithHeight[playersWithHeight['team_id'] == team_id]
 fig2 = px.histogram(teamsPlayers, x='height', nbins = 15, color_discrete_sequence=[teamColor2])
 fig2.update_xaxes(title_text = 'Height')
-fig2.udpate_yaxes(title_text = 'Frequency')
+fig2.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig2, theme = None)
