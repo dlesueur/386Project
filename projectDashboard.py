@@ -11,24 +11,26 @@ teams_list = teams['full_name']
 team = st.selectbox('Select a team', teams_list, key = "selectbox1")
 
 
-st.text('Distribution Of Points When At Home vs. Opponent')
+st.text('Distribution Of Points Scored')
 
-df = pd.read_csv('datasets/games.csv')
+games = pd.read_csv('datasets/games.csv')
 colors = pd.read_csv('datasets/teamColors.csv')
 teamColor1 = colors.loc[colors['full_name'] == team, 'colorHex'].values[0]
 teamColor2 = colors.loc[colors['full_name'] == team, 'ColorHex2'].values[0]
-team_df = df[df['home_team_name'] == team]
-fig = px.histogram(team_df, x='home_team_score', nbins=15, color_discrete_sequence=[teamColor1])
+home_scores = games[games['home_team_name'] == team]['home_team_score']
+visitor_scores = games[games['visitor_team_name'] == team]['visitor_team_score']
+team_scores = []
+team_scores.extend(home_scores)
+team_scores.extend(visitor_scores)
+team_scores_df = pd.DataFrame(team_scores, columns=['Scores'])
+
+
+# team_df = games[games['home_team_name'] == team]
+fig = px.histogram(team_scores_df, x='Scores', nbins=15, color_discrete_sequence=[teamColor1])
 fig.update_xaxes(title_text = 'Score')
 fig.update_yaxes(title_text = 'Frequency')
-fig2 = px.histogram(team_df, x='visitor_team_score', nbins=15, color_discrete_sequence=[teamColor2])
-fig2.update_xaxes(title_text = 'Opponent Score')
-fig2.update_yaxes(title_text = 'Frequency')
-
-st.title('Team Scores Histograms')
-
 st.plotly_chart(fig, theme = None, use_container_width=True)
-st.plotly_chart(fig2, theme=None ,use_container_width=True)
+
 
 # fig, ax = plt.subplots()
 # ax.hist(team_df['home_team_score'], bins=20, alpha=0.5, label="Home Team", color=teamColor1)  # Use your teamColor1
