@@ -111,6 +111,12 @@ player_points['height'] = player_points['height'].astype('int')
 st.text('Height vs. Points')
 
 fig4 = px.scatter(player_points, x = 'height', y = 'average_points', color = 'name', color_discrete_sequence = ['#EF8354'])
+fig4.update_layout(
+    xaxis_title='Height',
+    yaxis_title='Average Points Per Game'
+)
+fig4.update_traces(showlegend=False)
+st.plotly_chart(fig4, theme = None)
 # plt.scatter(x = player_points['height'], y = player_points['average_points'])
 # plt.xlabel("Height")
 # plt.ylabel("Average Points")
