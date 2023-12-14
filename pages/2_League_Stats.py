@@ -46,7 +46,7 @@ team_stats['win_pct'] = team_stats['wins'] / team_stats['total_games']
 
 
 st.text('Average Points Per Game vs. Win Percentage')
-fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color_discrete_sequence= ['#a4c2a5'])
+fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color='team', color_discrete_sequence= ['#a4c2a5'])
 fig.update_layout(
     xaxis_title='Average Points Per Game',
     yaxis_title='Win Percentage'
@@ -66,7 +66,7 @@ team_stats['opponent_total_points'] = op_stats
 team_stats['opponent_avg_points'] = team_stats['opponent_total_points'] / team_stats['total_games']
 
 st.text('Average Opponents\' Points Per Game vs. Win Percentage')
-fig2 = px.scatter(team_stats, x = 'opponent_average_points', y = 'win_pct', color_discrete_sequence= ['#28536b'])
+fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', colo = 'team', color_discrete_sequence= ['#28536b'])
 fig2.update_layout(
     xaxis_title='Average Opponents\' Points Per Game',
     yaxis_title='Win Percentage'
