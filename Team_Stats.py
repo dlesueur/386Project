@@ -28,13 +28,8 @@ fig.update_xaxes(title_text = 'Score')
 fig.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig, theme = None, use_container_width=True)
 
-# st.text('Season Record Against Other Teams')
-# this_teams_list = teams['full_name']
-# this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
-# this_team_df = team_df[team_df['visitor_team_name'] == this_team]
-# scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
-# st.dataframe(scores)
 
+st.title("Recorded Player Heights")
 players = pd.read_csv('datasets/playersCurrent.csv')
 playersWithHeight = players[players['height'] != 0]
 team_id = teams.loc[teams['full_name'] == team, 'id'].values[0]
@@ -43,3 +38,13 @@ fig2 = px.histogram(teamsPlayers, x='height', nbins = 15, color_discrete_sequenc
 fig2.update_xaxes(title_text = 'Height')
 fig2.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig2, theme = None)
+
+# POINTS SCORED VS OPPONENT SCATTERPLOT
+
+
+st.text('Season Record Against Other Teams')
+this_teams_list = teams['full_name']
+this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
+this_team_df = team_df[team_df['visitor_team_name'] == this_team]
+scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
+st.dataframe(scores)
