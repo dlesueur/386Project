@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 import matplotlib as plt
 
-st.title('2022-23 NBA Season')
+st.title('2022-23 NBA Season Stats by Team')
 
 teams = pd.read_csv('datasets/teams.csv')
 teams_list = teams['full_name']
@@ -29,7 +29,7 @@ fig.update_yaxes(title_text = 'Frequency')
 st.plotly_chart(fig, theme = None, use_container_width=True)
 
 
-st.title("Recorded Player Heights")
+st.text("Recorded Player Heights")
 players = pd.read_csv('datasets/playersCurrent.csv')
 playersWithHeight = players[players['height'] != 0]
 team_id = teams.loc[teams['full_name'] == team, 'id'].values[0]
