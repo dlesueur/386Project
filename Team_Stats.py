@@ -42,9 +42,9 @@ st.plotly_chart(fig2, theme = None)
 # POINTS SCORED VS OPPONENT SCATTERPLOT
 
 
-st.text('Season Record Against Other Teams')
-this_teams_list = teams['full_name']
-this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
-this_team_df = team_df[team_df['visitor_team_name'] == this_team]
-scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
-st.dataframe(scores)
+# st.text('Season Record Against Other Teams')
+# this_teams_list = teams['full_name']
+# this_team = st.selectbox('Select a team', this_teams_list, key = "selectbox2")
+# this_team_df = team_df[team_df['visitor_team_name'] == this_team]
+# scores = this_team_df[['date', 'home_team_score', 'visitor_team_score']].sort_values('date')
+# st.dataframe(scores)
