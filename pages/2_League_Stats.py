@@ -11,6 +11,7 @@ games = pd.read_csv("datasets/games.csv")
 players = pd.read_csv("datasets/players.csv")
 stats = pd.read_csv("datasets/stats.csv")
 teams = pd.read_csv("datasets/teams.csv")
+players_current = pd.read_csv("datasets/playersCurrent.csv")
 
 home_team_stats = games.groupby('home_team_abr').agg(
     total_points=pd.NamedAgg(column='home_team_score', aggfunc='sum'),
@@ -79,4 +80,39 @@ st.plotly_chart(fig2, theme = None)
 # plt.xlabel('Average Opponents Points Per Game')
 # plt.ylabel('Win Percentage')
 # plt.title('Average Opponent\'s Points Per Game vs. Win Percentage')
+# plt.show()
+
+st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
+fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = team_stats.index, color_discrete_sequence = ['#984447'])
+fig3.update_layout(
+    xaxis_title='Average Points Per Game',
+    yaxis_title='Average Opponents\' Points Per Game'
+)
+fig3.update_traces(showlegend=False)
+st.plotly_chart(fig3, theme = None)
+
+# plt.scatter(team_stats['average_points'], team_stats['opponent_avg_points'])
+# plt.xlabel('Average Points Per Game')
+# plt.ylabel('Average Opponent Points Per Game')
+# plt.show()
+
+new_stats = stats[stats['min'] != 0 ]
+player_points = new_stats.groupby('player_id').agg(
+    average_points = pd.NamedAgg(column = 'pts', aggfunc='mean'),
+    average_made = pd.NamedAgg(column = 'fg_pct', aggfunc = 'mean'),
+    average_3_made = pd.NamedAgg(column = 'fg3_pct', aggfunc = 'mean')
+)
+
+player_points = player_points.merge(players_current[['id', 'height', 'name']], left_on = 'player_id', right_on = 'id', how = 'left')
+player_points.drop(columns = ['id'], axis = 1, inplace=True)
+player_points.dropna(inplace=True)
+player_points['height'] = player_points['height'].astype('int')
+
+st.text('Height vs. Points')
+
+fig4 = px.scatter(player_points, x = 'height', y = 'average_points', color = 'name', color_discrete_sequence = ['#EF8354'])
+# plt.scatter(x = player_points['height'], y = player_points['average_points'])
+# plt.xlabel("Height")
+# plt.ylabel("Average Points")
+# plt.title("Height vs Average Points")
 # plt.show()
