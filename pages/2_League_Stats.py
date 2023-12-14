@@ -51,6 +51,7 @@ fig.update_layout(
     xaxis_title='Average Points Per Game',
     yaxis_title='Win Percentage'
 )
+fig.update_traces(showlegend=False)
 st.plotly_chart(fig, theme = None)
 
 
@@ -71,6 +72,7 @@ fig2.update_layout(
     xaxis_title='Average Opponents\' Points Per Game',
     yaxis_title='Win Percentage'
 )
+fig2.update_traces(showlegend=False)
 st.plotly_chart(fig2, theme = None)
 
 # plt.scatter(team_stats['opponent_avg_points'], team_stats['win_pct'], color = "red")
