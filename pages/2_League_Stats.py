@@ -181,6 +181,8 @@ fig8.update_layout(
 )
 fig8.update_traces(showlegend=False)
 st.plotly_chart(fig8, theme = None)
+
+
 # plt.scatter(x = stats_small['height'], y = stats_small['blk'], color = 'darkmagenta')
 # plt.xlabel("Height")
 # plt.ylabel("Blocks")
