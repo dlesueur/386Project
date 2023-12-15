@@ -112,7 +112,7 @@ st.text('Height vs. Points')
 
 fig4 = px.scatter(player_points, x = 'height', y = 'average_points', color = 'name', color_discrete_sequence = ['#EF8354'])
 fig4.update_layout(
-    xaxis_title='Height',
+    xaxis_title='Height (inches)',
     yaxis_title='Average Points Per Game'
 )
 fig4.update_traces(showlegend=False)
@@ -121,4 +121,68 @@ st.plotly_chart(fig4, theme = None)
 # plt.xlabel("Height")
 # plt.ylabel("Average Points")
 # plt.title("Height vs Average Points")
+# plt.show()
+
+st.text('Height vs. Avg FG Made')
+fig5 = px.scatter(player_points, x = 'height', y = 'average_made', color = 'name', color_discrete_sequence= ['#a4c2a5'])
+fig5.update_layout(
+    xaxis_title='Height (inches)',
+    yaxis_title='Average FG Rate Per Game'
+)
+fig5.update_traces(showlegend=False)
+st.plotly_chart(fig5, theme = None)
+
+# plt.scatter(x = player_points['height'], y = player_points['average_made'], color = "gold")
+# plt.xlabel("Height")
+# plt.ylabel("Average FG Made")
+# plt.title("Height vs Average FG Made")
+# plt.show()
+
+
+
+st.text('Height vs. Avg 3 Point Shot Made')
+
+fig6 = px.scatter(player_points, x = 'height', y = 'average_3_made', color = 'name', color_discrete_sequence = ['#984447'])
+fig6.update_layout(
+    xaxis_title='Height (inches)',
+    yaxis_title='Average 3 Point Shot Made Per Game'
+)
+fig6.update_traces(showlegend=False)
+st.plotly_chart(fig6, theme = None)
+# plt.scatter(x = player_points['height'], y = player_points['average_3_made'], color = "firebrick")
+# plt.xlabel("Height")
+# plt.ylabel("Average 3 Point Shots Made")
+# plt.title("Height vs Average 3 Points Made")
+# plt.show()
+
+stats_small = stats[['player_id', 'reb', 'pts', 'fg3m', 'fgm', 'min', 'blk']]
+stats_small = stats_small.merge(players_current[['id', 'height', 'name']], left_on = 'player_id', right_on = 'id')
+stats_small.drop(columns = 'id', axis = 1, inplace = True)
+stats_small = stats_small[stats_small['min'] != 0]
+
+fig7 = px.scatter(stats_small, x = 'height', y = 'reb', color = 'name', color_discrete_sequence = ['#EF8354'])
+fig7.update_layout(
+    xaxis_title='Height (inches)',
+    yaxis_title='Average Rebounds Per Game'
+)
+fig7.update_traces(showlegend=False)
+st.plotly_chart(fig7, theme = None)
+
+# plt.scatter(x = stats_small['height'], y = stats_small['reb'], color = 'mediumseagreen')
+# plt.xlabel("Height")
+# plt.ylabel("Rebounds")
+# plt.title("Height vs. Rebounds")
+# plt.show()
+
+fig8 = px.scatter(stats_small, x = 'height', y = 'blk', color = 'name', color_discrete_sequence= ['#a4c2a5'])
+fig8.update_layout(
+    xaxis_title='Height (inches)',
+    yaxis_title='Average Blocks Per Game'
+)
+fig8.update_traces(showlegend=False)
+st.plotly_chart(fig8, theme = None)
+# plt.scatter(x = stats_small['height'], y = stats_small['blk'], color = 'darkmagenta')
+# plt.xlabel("Height")
+# plt.ylabel("Blocks")
+# plt.title("Height vs. Blocks")
 # plt.show()
