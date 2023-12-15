@@ -163,7 +163,7 @@ stats_small = stats_small[stats_small['min'] != 0]
 fig7 = px.scatter(stats_small, x = 'height', y = 'reb', color = 'name', color_discrete_sequence = ['#EF8354'])
 fig7.update_layout(
     xaxis_title='Height (inches)',
-    yaxis_title='Average Rebounds Per Game'
+    yaxis_title='Rebounds'
 )
 fig7.update_traces(showlegend=False)
 st.plotly_chart(fig7, theme = None)
@@ -177,7 +177,7 @@ st.plotly_chart(fig7, theme = None)
 fig8 = px.scatter(stats_small, x = 'height', y = 'blk', color = 'name', color_discrete_sequence= ['#a4c2a5'])
 fig8.update_layout(
     xaxis_title='Height (inches)',
-    yaxis_title='Average Blocks Per Game'
+    yaxis_title='Blocks'
 )
 fig8.update_traces(showlegend=False)
 st.plotly_chart(fig8, theme = None)
