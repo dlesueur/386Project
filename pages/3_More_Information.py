@@ -7,11 +7,7 @@ import matplotlib as plt
 
 
 st.title("More Information")
-import streamlit as st
-
-st.write("This data was taken from the")
-st.markdown('[Ball Don\'t Lie API](https://www.balldontlie.io/home.html#introduction).')
-
+st.markdown("This data was taken from the [Ball Don't Lie API](https://www.balldontlie.io/home.html#introduction).", unsafe_allow_html=True)
 st.write("Team color information was taken from [Team Color Codes](https://teamcolorcodes.com/nba-team-color-codes/)")
 st.write("For a demonstration of data collection, view my [blog post](https://dlesueur.github.io/Ball-Don't-Lie/) about the process I used to access this API.")
 st.write("For more analysis of these graphs and a more thorough EDA, view this [blog post](https://dlesueur.github.io/EDA-Don't-Lie/)")
