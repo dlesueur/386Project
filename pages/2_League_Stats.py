@@ -46,6 +46,7 @@ for index, row in games.iterrows():
 team_stats['win_pct'] = team_stats['wins'] / team_stats['total_games']
 team_stats['team_id'] = range(1, 31)
 team_stats = team_stats.merge(teams[['full_name', 'id']], left_on = 'team_id', right_on = 'id')
+team_stats = team_stats.rename(columns = {'full_name' : 'team_name'})
 
 st.text('Average Points Per Game vs. Win Percentage')
 fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color='full_name', color_discrete_sequence= ['#a4c2a5'])
