@@ -44,10 +44,11 @@ for index, row in games.iterrows():
         team_stats.loc[visitor_team, 'wins'] += 1
 
 team_stats['win_pct'] = team_stats['wins'] / team_stats['total_games']
-
+team_stats['team_id'] = range(1, 31)
+team_stats = team_stats.merge(teams[['full_name', 'id']], left_on = 'team_id', right_on = 'id')
 
 st.text('Average Points Per Game vs. Win Percentage')
-fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color=team_stats.index, color_discrete_sequence= ['#a4c2a5'])
+fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color='full_name', color_discrete_sequence= ['#a4c2a5'])
 fig.update_layout(
     xaxis_title='Average Points Per Game',
     yaxis_title='Win Percentage'
@@ -68,7 +69,7 @@ team_stats['opponent_total_points'] = op_stats
 team_stats['opponent_avg_points'] = team_stats['opponent_total_points'] / team_stats['total_games']
 
 st.text('Average Opponents\' Points Per Game vs. Win Percentage')
-fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = team_stats.index, color_discrete_sequence= ['#28536b'])
+fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = 'full_name', color_discrete_sequence= ['#28536b'])
 fig2.update_layout(
     xaxis_title='Average Opponents\' Points Per Game',
     yaxis_title='Win Percentage'
@@ -76,14 +77,8 @@ fig2.update_layout(
 fig2.update_traces(showlegend=False)
 st.plotly_chart(fig2, theme = None)
 
-# plt.scatter(team_stats['opponent_avg_points'], team_stats['win_pct'], color = "red")
-# plt.xlabel('Average Opponents Points Per Game')
-# plt.ylabel('Win Percentage')
-# plt.title('Average Opponent\'s Points Per Game vs. Win Percentage')
-# plt.show()
-
 st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
-fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = team_stats.index, color_discrete_sequence = ['#984447'])
+fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = 'full_name', color_discrete_sequence = ['#984447'])
 fig3.update_layout(
     xaxis_title='Average Points Per Game',
     yaxis_title='Average Opponents\' Points Per Game'
@@ -91,10 +86,6 @@ fig3.update_layout(
 fig3.update_traces(showlegend=False)
 st.plotly_chart(fig3, theme = None)
 
-# plt.scatter(team_stats['average_points'], team_stats['opponent_avg_points'])
-# plt.xlabel('Average Points Per Game')
-# plt.ylabel('Average Opponent Points Per Game')
-# plt.show()
 
 new_stats = stats[stats['min'] != 0 ]
 player_points = new_stats.groupby('player_id').agg(
@@ -117,11 +108,6 @@ fig4.update_layout(
 )
 fig4.update_traces(showlegend=False)
 st.plotly_chart(fig4, theme = None)
-# plt.scatter(x = player_points['height'], y = player_points['average_points'])
-# plt.xlabel("Height")
-# plt.ylabel("Average Points")
-# plt.title("Height vs Average Points")
-# plt.show()
 
 st.text('Height vs. Avg FG Made')
 fig5 = px.scatter(player_points, x = 'height', y = 'average_made', color = 'name', color_discrete_sequence= ['#a4c2a5'])
@@ -132,11 +118,7 @@ fig5.update_layout(
 fig5.update_traces(showlegend=False)
 st.plotly_chart(fig5, theme = None)
 
-# plt.scatter(x = player_points['height'], y = player_points['average_made'], color = "gold")
-# plt.xlabel("Height")
-# plt.ylabel("Average FG Made")
-# plt.title("Height vs Average FG Made")
-# plt.show()
+
 
 
 
@@ -149,11 +131,7 @@ fig6.update_layout(
 )
 fig6.update_traces(showlegend=False)
 st.plotly_chart(fig6, theme = None)
-# plt.scatter(x = player_points['height'], y = player_points['average_3_made'], color = "firebrick")
-# plt.xlabel("Height")
-# plt.ylabel("Average 3 Point Shots Made")
-# plt.title("Height vs Average 3 Points Made")
-# plt.show()
+
 
 stats_small = stats[['player_id', 'reb', 'pts', 'fg3m', 'fgm', 'min', 'blk']]
 stats_small = stats_small.merge(players_current[['id', 'height', 'name']], left_on = 'player_id', right_on = 'id')
@@ -168,11 +146,7 @@ fig7.update_layout(
 fig7.update_traces(showlegend=False)
 st.plotly_chart(fig7, theme = None)
 
-# plt.scatter(x = stats_small['height'], y = stats_small['reb'], color = 'mediumseagreen')
-# plt.xlabel("Height")
-# plt.ylabel("Rebounds")
-# plt.title("Height vs. Rebounds")
-# plt.show()
+
 
 fig8 = px.scatter(stats_small, x = 'height', y = 'blk', color = 'name', color_discrete_sequence= ['#a4c2a5'])
 fig8.update_layout(
@@ -183,8 +157,4 @@ fig8.update_traces(showlegend=False)
 st.plotly_chart(fig8, theme = None)
 
 
-# plt.scatter(x = stats_small['height'], y = stats_small['blk'], color = 'darkmagenta')
-# plt.xlabel("Height")
-# plt.ylabel("Blocks")
-# plt.title("Height vs. Blocks")
-# plt.show()
+
