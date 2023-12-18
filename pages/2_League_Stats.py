@@ -49,14 +49,33 @@ team_stats = team_stats.merge(teams[['full_name', 'id']], left_on = 'team_id', r
 team_stats = team_stats.rename(columns = {'full_name' : 'team_name'})
 
 st.text('Average Points Per Game vs. Win Percentage')
-fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color='team_name', color_discrete_sequence= ['#a4c2a5'])
+fig = px.scatter(
+    team_stats, x='average_points', y='win_pct', color='team_name',
+    color_discrete_sequence=['#a4c2a5']
+)
+
+# Calculate trend line
+poly_fit = np.polyfit(team_stats['average_points'], team_stats['win_pct'], 1)
+trend_line = poly_fit[0] * team_stats['average_points'] + poly_fit[1]
+
+# Add trend line as a new trace
+fig.add_scatter(
+    x=team_stats['average_points'],
+    y=trend_line,
+    mode='lines',
+    name='Trend Line',
+    line=dict(color='red', width=2)
+)
+
+# Update layout
 fig.update_layout(
     xaxis_title='Average Points Per Game',
-    yaxis_title='Win Percentage'
+    yaxis_title='Win Percentage',
+    showlegend=False
 )
-fig.update_traces(showlegend=False)
-st.plotly_chart(fig, theme = None)
 
+# Display the plotly chart
+st.plotly_chart(fig, theme=None)
 
 home_op_points = games.groupby('visitor_team_abr').agg(
     total_points = pd.NamedAgg(column='home_team_score', aggfunc='sum')
