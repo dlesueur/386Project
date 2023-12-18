@@ -94,9 +94,12 @@ fig2 = px.scatter(
     color_discrete_sequence=['#28536b']
 )
 
-# Calculate trend line
-poly_fit = np.polyfit(team_stats['opponent_avg_points'], team_stats['win_pct'], 1)
-trend_line = poly_fit[0] * team_stats['opponent_avg_points'] + poly_fit[1]
+# Fit Theil-Sen Estimator
+theil_sen = TheilSenRegressor()
+theil_sen.fit(team_stats[['opponent_avg_points']], team_stats['win_pct'])
+
+# Predict trend line values
+trend_line = theil_sen.predict(team_stats[['opponent_avg_points']])
 
 # Add trend line as a new trace with hex color code
 fig2.add_scatter(
@@ -104,7 +107,7 @@ fig2.add_scatter(
     y=trend_line,
     mode='lines',
     name='Trend Line',
-    line=dict(color='#3094cb', width=2)  # Replace #FF5733 with your hex color code
+    line=dict(color='#3094cb', width=2)  # Replace #3094cb with your hex color code
 )
 
 # Update layout
