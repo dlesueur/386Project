@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import plotly.express as px
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
 st.title('2022-23 NBA Season League Stats')
@@ -69,23 +69,23 @@ team_stats['opponent_total_points'] = op_stats
 
 team_stats['opponent_avg_points'] = team_stats['opponent_total_points'] / team_stats['total_games']
 
-st.text('Average Opponents\' Points Per Game vs. Win Percentage')
-fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = 'team_name', color_discrete_sequence= ['#28536b'])
-fig2.update_layout(
-    xaxis_title='Average Opponents\' Points Per Game',
-    yaxis_title='Win Percentage'
-)
-fig2.update_traces(showlegend=False)
-st.plotly_chart(fig2, theme = None)
+# st.text('Average Opponents\' Points Per Game vs. Win Percentage')
+# fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = 'team_name', color_discrete_sequence= ['#28536b'])
+# fig2.update_layout(
+#     xaxis_title='Average Opponents\' Points Per Game',
+#     yaxis_title='Win Percentage'
+# )
+# fig2.update_traces(showlegend=False)
+# st.plotly_chart(fig2, theme = None)
 
-st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
-fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = 'team_name', color_discrete_sequence = ['#984447'])
-fig3.update_layout(
-    xaxis_title='Average Points Per Game',
-    yaxis_title='Average Opponents\' Points Per Game'
-)
-fig3.update_traces(showlegend=False)
-st.plotly_chart(fig3, theme = None)
+# st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
+# fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = 'team_name', color_discrete_sequence = ['#984447'])
+# fig3.update_layout(
+#     xaxis_title='Average Points Per Game',
+#     yaxis_title='Average Opponents\' Points Per Game'
+# )
+# fig3.update_traces(showlegend=False)
+# st.plotly_chart(fig3, theme = None)
 
 
 new_stats = stats[stats['min'] != 0 ]
@@ -138,7 +138,7 @@ stats_small = stats[['player_id', 'reb', 'pts', 'fg3m', 'fgm', 'min', 'blk']]
 stats_small = stats_small.merge(players_current[['id', 'height', 'name']], left_on = 'player_id', right_on = 'id')
 stats_small.drop(columns = 'id', axis = 1, inplace = True)
 stats_small = stats_small[stats_small['min'] != 0]
-
+st.text('Height vs. Rebounds')
 fig7 = px.scatter(stats_small, x = 'height', y = 'reb', color = 'name', color_discrete_sequence = ['#EF8354'])
 fig7.update_layout(
     xaxis_title='Height (inches)',
@@ -148,7 +148,7 @@ fig7.update_traces(showlegend=False)
 st.plotly_chart(fig7, theme = None)
 
 
-
+st.text('Heights vs. Blocks')
 fig8 = px.scatter(stats_small, x = 'height', y = 'blk', color = 'name', color_discrete_sequence= ['#a4c2a5'])
 fig8.update_layout(
     xaxis_title='Height (inches)',
