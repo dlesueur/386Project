@@ -64,7 +64,7 @@ fig.add_scatter(
     y=trend_line,
     mode='lines',
     name='Trend Line',
-    line=dict(color='red', width=2)
+    line=dict(color='#a0dea2', width=2)
 )
 
 # Update layout
@@ -89,22 +89,62 @@ team_stats['opponent_total_points'] = op_stats
 team_stats['opponent_avg_points'] = team_stats['opponent_total_points'] / team_stats['total_games']
 
 st.text('Average Opponents\' Points Per Game vs. Win Percentage')
-fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = 'team_name', color_discrete_sequence= ['#28536b'])
+fig2 = px.scatter(
+    team_stats, x='opponent_avg_points', y='win_pct', color='team_name',
+    color_discrete_sequence=['#28536b']
+)
+
+# Calculate trend line
+poly_fit = np.polyfit(team_stats['opponent_avg_points'], team_stats['win_pct'], 1)
+trend_line = poly_fit[0] * team_stats['opponent_avg_points'] + poly_fit[1]
+
+# Add trend line as a new trace with hex color code
+fig2.add_scatter(
+    x=team_stats['opponent_avg_points'],
+    y=trend_line,
+    mode='lines',
+    name='Trend Line',
+    line=dict(color='#3094cb', width=2)  # Replace #FF5733 with your hex color code
+)
+
+# Update layout
 fig2.update_layout(
     xaxis_title='Average Opponents\' Points Per Game',
-    yaxis_title='Win Percentage'
+    yaxis_title='Win Percentage',
+    showlegend=False
 )
-fig2.update_traces(showlegend=False)
-st.plotly_chart(fig2, theme = None)
+
+# Display the plotly chart
+st.plotly_chart(fig2, theme=None)
 
 st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
-fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = 'team_name', color_discrete_sequence = ['#984447'])
+fig3 = px.scatter(
+    team_stats, x='average_points', y='opponent_avg_points', color='team_name',
+    color_discrete_sequence=['#984447']
+)
+
+# Calculate trend line
+poly_fit = np.polyfit(team_stats['average_points'], team_stats['opponent_avg_points'], 1)
+trend_line = poly_fit[0] * team_stats['average_points'] + poly_fit[1]
+
+# Add trend line as a new trace with hex color code
+fig3.add_scatter(
+    x=team_stats['average_points'],
+    y=trend_line,
+    mode='lines',
+    name='Trend Line',
+    line=dict(color='#ff7c81', width=2)  # Replace #FF5733 with your hex color code
+)
+
+# Update layout
 fig3.update_layout(
     xaxis_title='Average Points Per Game',
-    yaxis_title='Average Opponents\' Points Per Game'
+    yaxis_title='Average Opponents\' Points Per Game',
+    showlegend=False
 )
-fig3.update_traces(showlegend=False)
-st.plotly_chart(fig3, theme = None)
+
+# Display the plotly chart
+st.plotly_chart(fig3, theme=None)
 
 
 new_stats = stats[stats['min'] != 0 ]
