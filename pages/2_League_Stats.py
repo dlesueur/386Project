@@ -158,4 +158,36 @@ fig8.update_traces(showlegend=False)
 st.plotly_chart(fig8, theme = None)
 
 
+stats = stats.merge(players[['id', 'height']], left_on = 'player_id', right_on = 'id')
+stats_mini = stats[['position', 'pts', 'reb', 'stl', 'blk', 'ast', 'height']]
+melted = stats_mini.melt(id_vars = 'position', var_name = "metric", value_name = "value")
 
+
+def create_boxplots(melted):
+    metrics = melted['metric'].unique()
+    positions = ['G', 'F', 'F-C', 'C', 'G-F', 'F-G', 'C-F']
+    metrics_nice = ['Points', 'Rebounds', 'Steals', 'Blocks', 'Assists', 'Height']
+    colors = ['red', 'blue', 'green', 'orange', 'purple', 'yellow', 'teal']  # Define colors for positions
+
+    for counter, metric in enumerate(metrics):
+        plt.figure(figsize=(6, 4))  # Adjust figure size if needed
+
+        metric_data = melted[melted['metric'] == metric]
+        # Drop NaN values for the current metric
+        metric_data = metric_data.dropna()
+        box_data = [metric_data[metric_data['position'] == pos]['value'] for pos in positions]
+        bp = plt.boxplot(box_data, patch_artist=True)
+        plt.xticks(range(1, len(positions) + 1), positions)
+        plt.title(f'{metrics_nice[counter]} For Each Position')
+        plt.xlabel('Position')
+        plt.ylabel('Value')
+
+        # Set colors for each position
+        for patch, color in zip(bp['boxes'], colors):
+            patch.set_facecolor(color)
+
+        plt.tight_layout()
+        st.pyplot()  # Display the plot using Streamlit
+
+# Assuming 'melted' is your DataFrame
+create_boxplots(melted)
