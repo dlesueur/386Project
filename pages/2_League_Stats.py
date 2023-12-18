@@ -3,7 +3,6 @@ import streamlit as st
 import numpy as np
 import plotly.express as px
 import matplotlib as plt
-from sklearn.linear_model import TheilSenRegressor
 
 
 st.title('2022-23 NBA Season League Stats')
@@ -50,33 +49,14 @@ team_stats = team_stats.merge(teams[['full_name', 'id']], left_on = 'team_id', r
 team_stats = team_stats.rename(columns = {'full_name' : 'team_name'})
 
 st.text('Average Points Per Game vs. Win Percentage')
-fig = px.scatter(
-    team_stats, x='average_points', y='win_pct', color='team_name',
-    color_discrete_sequence=['#a4c2a5']
-)
-
-# Calculate trend line
-poly_fit = np.polyfit(team_stats['average_points'], team_stats['win_pct'], 1)
-trend_line = poly_fit[0] * team_stats['average_points'] + poly_fit[1]
-
-# Add trend line as a new trace
-fig.add_scatter(
-    x=team_stats['average_points'],
-    y=trend_line,
-    mode='lines',
-    name='Trend Line',
-    line=dict(color='#a0dea2', width=2)
-)
-
-# Update layout
+fig = px.scatter(team_stats, x = 'average_points', y = 'win_pct', color='team_name', color_discrete_sequence= ['#a4c2a5'])
 fig.update_layout(
     xaxis_title='Average Points Per Game',
-    yaxis_title='Win Percentage',
-    showlegend=False
+    yaxis_title='Win Percentage'
 )
+fig.update_traces(showlegend=False)
+st.plotly_chart(fig, theme = None)
 
-# Display the plotly chart
-st.plotly_chart(fig, theme=None)
 
 home_op_points = games.groupby('visitor_team_abr').agg(
     total_points = pd.NamedAgg(column='home_team_score', aggfunc='sum')
@@ -90,65 +70,22 @@ team_stats['opponent_total_points'] = op_stats
 team_stats['opponent_avg_points'] = team_stats['opponent_total_points'] / team_stats['total_games']
 
 st.text('Average Opponents\' Points Per Game vs. Win Percentage')
-fig2 = px.scatter(
-    team_stats, x='opponent_avg_points', y='win_pct', color='team_name',
-    color_discrete_sequence=['#28536b']
-)
-
-# Fit Theil-Sen Estimator
-theil_sen = TheilSenRegressor()
-theil_sen.fit(team_stats[['opponent_avg_points']], team_stats['win_pct'])
-
-# Predict trend line values
-trend_line = theil_sen.predict(team_stats[['opponent_avg_points']])
-
-# Add trend line as a new trace with hex color code
-fig2.add_scatter(
-    x=team_stats['opponent_avg_points'],
-    y=trend_line,
-    mode='lines',
-    name='Trend Line',
-    line=dict(color='#3094cb', width=2)  # Replace #3094cb with your hex color code
-)
-
-# Update layout
+fig2 = px.scatter(team_stats, x = 'opponent_avg_points', y = 'win_pct', color = 'team_name', color_discrete_sequence= ['#28536b'])
 fig2.update_layout(
     xaxis_title='Average Opponents\' Points Per Game',
-    yaxis_title='Win Percentage',
-    showlegend=False
+    yaxis_title='Win Percentage'
 )
-
-# Display the plotly chart
-st.plotly_chart(fig2, theme=None)
+fig2.update_traces(showlegend=False)
+st.plotly_chart(fig2, theme = None)
 
 st.text('Average Points Per Game vs. Average Opponents\'s Points Per Game')
-fig3 = px.scatter(
-    team_stats, x='average_points', y='opponent_avg_points', color='team_name',
-    color_discrete_sequence=['#984447']
-)
-
-# Calculate trend line
-poly_fit = np.polyfit(team_stats['average_points'], team_stats['opponent_avg_points'], 1)
-trend_line = poly_fit[0] * team_stats['average_points'] + poly_fit[1]
-
-# Add trend line as a new trace with hex color code
-fig3.add_scatter(
-    x=team_stats['average_points'],
-    y=trend_line,
-    mode='lines',
-    name='Trend Line',
-    line=dict(color='#ff7c81', width=2)  # Replace #FF5733 with your hex color code
-)
-
-# Update layout
+fig3 = px.scatter(team_stats, x = 'average_points', y = 'opponent_avg_points', color = 'team_name', color_discrete_sequence = ['#984447'])
 fig3.update_layout(
     xaxis_title='Average Points Per Game',
-    yaxis_title='Average Opponents\' Points Per Game',
-    showlegend=False
+    yaxis_title='Average Opponents\' Points Per Game'
 )
-
-# Display the plotly chart
-st.plotly_chart(fig3, theme=None)
+fig3.update_traces(showlegend=False)
+st.plotly_chart(fig3, theme = None)
 
 
 new_stats = stats[stats['min'] != 0 ]
