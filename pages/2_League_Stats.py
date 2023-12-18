@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import plotly.express as px
 import matplotlib as plt
+from sklearn.linear_model import TheilSenRegressor
 
 
 st.title('2022-23 NBA Season League Stats')
