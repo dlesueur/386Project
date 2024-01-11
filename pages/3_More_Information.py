@@ -13,3 +13,4 @@ st.write("For a demonstration of data collection, view my [blog post](https://dl
 st.write("For more analysis of these graphs and a more thorough EDA, view this [blog post](https://dlesueur.github.io/EDA-Don't-Lie/)")
 st.write("Here is my [repository](https://github.com/dlesueur/386Project) containing all of the code for this dashboard, as well as all of the code used to collet, clean, and explore this data.")
 
+st.date_input("Starting Date:", format="YYYY-MM-DD", value=None)
